@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Admin login</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <style>
+        .auth-container {
+            max-width: 360px;
+            margin: 80px auto;
+            padding: 24px 28px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            font-family: system-ui, sans-serif;
+        }
+        .auth-container h1 { margin: 0 0 18px; font-size: 22px; }
+        .form-row { margin-bottom: 14px; }
+        .form-row label { display:block; font-size:13px; margin-bottom:4px; }
+        .form-row input {
+            width:100%; padding:8px 10px; box-sizing:border-box;
+            border-radius:4px; border:1px solid #ccc; font-size:14px;
+        }
+        .form-row input:focus {
+            outline:none; border-color:#0071c2;
+            box-shadow:0 0 0 1px rgba(0,113,194,0.2);
+        }
+        .btn {
+            background:#0071c2; color:#fff; border:none;
+            border-radius:4px; padding:9px 16px; font-size:14px; cursor:pointer;
+        }
+        .btn:hover { background:#005c9c; }
+        .error { margin-top:8px; color:#d93025; font-size:13px; min-height: 16px; }
+    </style>
+</head>
+<body>
+<div class="auth-container">
+    <h1>Admin login</h1>
+
+    <form method="post" action="/admin/login">
+        <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" />
+        </div>
+
+        <div class="form-row">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" />
+        </div>
+
+        <button type="submit" class="btn">Log in</button>
+
+        <!-- сюда можно выводить текст ошибки с сервера, если захочешь -->
+    </form>
+</div>
+</body>
+</html>

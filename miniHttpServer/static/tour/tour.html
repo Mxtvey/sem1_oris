@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>${Hotel.Name}</title>
+    <link rel="stylesheet" href="css/tour.css" />
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div class="top-header">
+        <div class="container">
+          <div class="top-header-content">
+            <div class="logo">
+              <a href="/tour">
+                <img src="headerlogo/header-logo-revngo.svg" />
+                <img src="headerlogo/slogan-en.svg" class="slogan" />
+              </a>
+            </div>
+
+            <div class="right-menu">
+              <a href="#">For partners</a>
+              <img
+                src="country/flag-for-flag-united-kingdom-svgrepo-com.svg"
+                class="flag"
+              />
+              <span class="currency">EUR</span>
+              <a href="#" class="customer-service">Customer service</a>
+              <button class="login-btn">LOGIN</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="filters-bar">
+        <div class="container filters-content">
+          <!-- Destination -->
+          <input
+            type="text"
+            class="filter-input destination"
+            placeholder="Balatonfüred"
+          />
+          <div class="dates-wrapper">
+            <input
+              type="text"
+              class="date-field checkin-field"
+              placeholder="Check in"
+            />
+            <input
+              type="text"
+              class="date-field checkout-field"
+              placeholder="Check out"
+            />
+          </div>
+
+          <!-- Guests -->
+          <div class="filter-guests">
+            <img src="jpg/man.png" class="guest-icon" alt="" />
+            2
+            <img src="jpg/children.png" class="child-icon" alt="" />
+            0 ▼
+          </div>
+
+          <!-- Search button -->
+          <button class="search-btn">🔍 Search</button>
+        </div>
+      </div>
+
+      <div class="page-header">
+        <div class="breadcrumbs">
+          <a href="/">Homepage</a> >
+          <title>${Hotel.Name}</title>
+        </div>
+      </div>
+      <div class="container-hotel-title">
+        <div class="title-left">
+          <h1 class="hotel-title-full">${Hotel.Name} ★${Hotel.Stars}</h1>
+
+          <!-- Адрес -->
+          <a class="hotel-address">
+            ${Hotel.Location.Address}, ${Hotel.Location.City},
+            ${Hotel.Location.Country}
+          </a>
+        </div>
+
+        <!-- Rating block -->
+        <div class="rating-box">
+          <div class="rating-texts">
+            <div class="rating-label">Very good</div>
+            <div class="rating-count">${Hotel.ReviewsCount} reviews</div>
+          </div>
+
+          <div class="rating-circle">${Hotel.Rating}</div>
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- GRID OF PAGE -->
+      <div class="hotel-main-grid">
+        <div class="left-column">
+          <div class="hotel-gallery">
+            <div class="gallery-main">
+              <img src="${Hotel.ImageUrl}" alt="Main photo" />
+              <div class="gallery-count">81 photos</div>
+            </div>
+
+            <div class="gallery-row">
+              <img src="${Hotel.ImageUrl1}" />
+              <img src="${Hotel.ImageUrl2}" />
+              <img src="${Hotel.ImageUrl3}" />
+            </div>
+          </div>
+
+          <div class="hotel-info-block">
+            <!-- Иконки -->
+            <div class="info-icons-row">
+              $if(Hotel.IsKidFriendly)
+              <div class="info-icon">
+                <img src="jpg/baby.svg" />
+                <span>Baby-friendly</span>
+              </div>
+              $endif $if(Hotel.HasPool)
+              <div class="info-icon">
+                <img src="jpg/lotus.png" />
+                <span>Pool</span>
+              </div>
+              $endif
+
+              <div class="info-icon">
+                <img src="jpg/air-conditioner.png" />
+                <span>Air-conditioned rooms</span>
+              </div>
+
+              $if(Hotel.HasWifi)
+              <div class="info-icon">
+                <img src="jpg/wif.png" />
+                <span>Free WiFi</span>
+              </div>
+              $endif
+            </div>
+
+            <div class="info-text-wrapper">
+              <div class="info-text collapsed" id="hotel-description">
+                <p>${Hotel.Description}</p>
+              </div>
+
+              <div class="info-more" id="toggle-description">
+                See full description ▼
+              </div>
+            </div>
+          </div>
+
+          <div class="reviews-section">
+            <h2>Guest reviews</h2>
+
+            <div class="rating-box">
+              <div class="rating-number">${Hotel.Rating}</div>
+              <div class="rating-info">
+                <div class="rating-title">Very good</div>
+                <div class="rating-subtitle">
+                  based on ${Hotel.ReviewsCount} reviews.
+                </div>
+              </div>
+            </div>
+
+            <!-- Ты можешь динамически вставлять отзывы через foreach -->
+
+            <div class="reviews-link">
+              <a href="#">All reviews (${Hotel.ReviewsCount})</a>
+            </div>
+          </div>
+
+          <h2 class="rooms-title">Rooms, prices</h2>
+
+          $foreach(var r in Rooms)
+          <div class="room-card">
+            <div class="room-top">
+              <img class="room-photo" src="${r.ImageUrl}" alt="${r.Name}" />
+              <div class="room-info">
+                <h3 class="room-title">${r.Name}</h3>
+
+                <div class="room-specs">
+                  <span class="spec">
+                    <img src="jpg/arrows-expand-svgrepo-com.svg" />
+                    ${r.AreaM2} m²
+                  </span>
+                  <span class="spec">
+                    <img src="jpg/bed-svgrepo-com.svg" />
+                    ${r.Bedrooms} bedroom(s)
+                  </span>
+                </div>
+
+                <div class="room-features">
+                  $if(HasWifi)
+                  <div><img src="jpg/wif.png" /> WiFi</div>
+                  $endif $if(HasAc)
+                  <div>
+                    <img src="jpg/air-conditioner.png" /> Air conditioning
+                  </div>
+                  $endif $if(Balcony)
+                  <div>
+                    <img src="jpg/balcony-svgrepo-com.svg" /> Balcony/Terrace
+                  </div>
+                  $endif
+                </div>
+              </div>
+            </div>
+          </div>
+          $endfor
+
+          <div class="services-wrapper">
+            <h2 class="services-title">Services and features</h2>
+
+            <div class="services-table">
+              <!-- Parking -->
+              <div class="service-row">
+                <div class="service-left">Parking</div>
+                <div class="service-right">
+                  $if(Hotel.HasParking) Available $else Not available $endif
+                </div>
+              </div>
+              <div class="service-divider"></div>
+
+              <!-- Internet -->
+              <div class="service-row">
+                <div class="service-left">Internet</div>
+                <div class="service-right">
+                  $if(Hotel.HasWifi) WiFi available $else No WiFi $endif
+                </div>
+              </div>
+              <div class="service-divider"></div>
+
+              <!-- Leisure -->
+              <div class="service-row">
+                <div class="service-left">Leisure, recreation</div>
+                <div class="service-right">Golf course…</div>
+              </div>
+              <div class="service-divider"></div>
+
+              <!-- Wellness row 1 -->
+              <div class="service-row">
+                <div class="service-left">
+                  Wellness section,<br />relaxation
+                </div>
+                <div class="service-right">
+                  <div class="highlight-line">Size: 165 m²</div>
+                  <div class="highlight-badge">
+                    The guests of the hotel can use it free of charge.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Wellness row 2 -->
+              <div class="service-row wellness-second">
+                <div class="service-right">
+                  <div class="wellness-photo-block">
+                    <div class="service-photo">
+                      <img src="jpg/micro.jpg" />
+                      <span class="photo-count">14 photo</span>
+                    </div>
+
+                    <ul class="service-list">
+                      $foreach(var feature in Hotel.WellnessFeatures)
+                      <li>${feature}</li>
+                      $endfor
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="service-divider"></div>
+
+              <!-- General services / kids -->
+              <div class="service-row">
+                <div class="service-left">General services</div>
+                <div class="service-right">
+                  <ul class="service-list">
+                    $foreach(var s in Hotel.KidServices)
+                    <li>${s}</li>
+                    $endfor
+                  </ul>
+                  <div class="highlight-badge">
+                    Complimentary for children aged 3 and under.
+                  </div>
+                </div>
+              </div>
+              <div class="service-divider"></div>
+
+              <!-- Catering -->
+              <div class="service-row">
+                <div class="service-left">Catering</div>
+                <div class="service-right">
+                  Cuisine type in own restaurant: ${Hotel.CuisineTypes}<br />
+                  Dining options: ${Hotel.DiningOptions}<br />
+                  <div class="highlight-badge">${Hotel.CateringNote}</div>
+                  <div class="highlight-badge">
+                    The restaurant is open, and for safety, with extra distance.
+                  </div>
+                </div>
+              </div>
+              <div class="service-divider"></div>
+
+              <!-- Kid-friendly services -->
+              <div class="service-row">
+                <div class="service-left">Kid-friendly services</div>
+                <div class="service-right">
+                  <ul class="service-list">
+                    $foreach(var service in Hotel.KidFriendlyServices)
+                    <li>${service}</li>
+                    $endfor
+                  </ul>
+                  <div class="highlight-badge">
+                    Complimentary for children aged 3 and under.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="useful-wrapper">
+            <h2 class="useful-title">Useful information</h2>
+
+            <div class="useful-list">
+              $foreach(var u in Hotel.UsefulInfo)
+              <div class="useful-row">
+                <div class="useful-distance">${u.Distance}</div>
+                <div class="useful-text">${u.Label}</div>
+              </div>
+              $endfor
+            </div>
+          </div>
+
+          <div class="policies-wrapper">
+            <h2 class="policies-title">General Policies</h2>
+
+            <div class="policies-table">
+              <div class="policies-row">
+                <div class="pol-left">Check-in</div>
+                <div class="pol-right">
+                  ${Hotel.CheckInFrom} - ${Hotel.CheckInTo}
+                </div>
+              </div>
+              <div class="pol-divider"></div>
+
+              <div class="policies-row">
+                <div class="pol-left">Check out</div>
+                <div class="pol-right">${Hotel.CheckOutUntil}</div>
+              </div>
+              <div class="pol-divider"></div>
+
+              <div class="policies-row">
+                <div class="pol-left">Spoken languages</div>
+                <div class="pol-right">${Hotel.SpokenLanguages}</div>
+              </div>
+              <div class="pol-divider"></div>
+
+              <div class="policies-row">
+                <div class="pol-left">
+                  Full price / remaining amount after prepayment - due date
+                </div>
+                <div class="pol-right">${Hotel.PaymentPolicy}</div>
+              </div>
+              <div class="pol-divider"></div>
+
+              <div class="policies-row">
+                <div class="pol-left">Accepted currency</div>
+                <div class="pol-right">${Hotel.AcceptedCurrency}</div>
+              </div>
+              <div class="pol-divider"></div>
+
+              <div class="policies-row">
+                <div class="pol-left">Accepted cards</div>
+                <div class="pol-right pol-cards">
+                  $foreach(var c in Hotel.AcceptedCards)
+                  <img src="/jpg/${c}" class="pol-card" />
+                  $endfor
+                </div>
+              </div>
+              <div class="pol-divider"></div>
+
+              <div class="policies-row">
+                <div class="pol-left">Local tax</div>
+                <div class="pol-right">${Hotel.LocalTax}</div>
+              </div>
+              <div class="pol-divider"></div>
+
+              <div class="policies-row">
+                <div class="pol-left">Reception</div>
+                <div class="pol-right">${Hotel.ReceptionHours}</div>
+              </div>
+              <div class="pol-divider"></div>
+
+              <div class="policies-row">
+                <div class="pol-left">Wellness services</div>
+                <div class="pol-right">
+                  08:00 - 21:00<br />
+                  A wellness részleget a szálláshely vendégei ingyenesen
+                  használhatják.
+                </div>
+              </div>
+              <div class="pol-divider"></div>
+
+              <div class="policies-row">
+                <div class="pol-left">Business operator</div>
+                <div class="pol-right">
+                  <a href="#">Fortrend Hotel Kft.</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bottom-bar">
+            <div class="currency-selector">
+              <button class="currency-btn">
+                <img src="jpg/coin-svgrepo-com.svg" class="cur-icon" />
+                EUR (€) ▼
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ПРАВАЯ КОЛОНКА -->
+        <div class="right-column">
+          <div class="booking-panel">
+            <div class="booking-input">Enter a date for exact prices!</div>
+
+            <div class="booking-room">
+              <span>1 × Standard room</span>
+              <span class="room-price">${Hotel.Price} €</span>
+            </div>
+
+            <hr class="divider" />
+
+            <div class="price-row">
+              <div class="price-left">Guide price:</div>
+
+              <div class="price-right">
+                <div class="big-price">>${Hotel.Price} €</div>
+                <div class="small-note">
+                  ${Hotel.Adults} adults, ${Hotel.MealType}
+                </div>
+                <div class="small-note">Includes taxes</div>
+              </div>
+            </div>
+
+            <a href="/booking?hotel=${Hotel.Id}">
+              <button class="booking-submit">Select</button>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- end hotel-main-grid -->
+    </div>
+
+    <!-- end page-container -->
+
+    <!-- BACK TO TOP BUTTON -->
+    <button class="back-top" id="backTopBtn">↑</button>
+
+    <!-- FOOTER -->
+    <div class="footer-stats">
+      <div>Every reservation is confirmed by ${Hotel.Name} directly</div>
+      <div>Free booking without fine prints</div>
+      <div>
+        88% of real guests would recommend RevNGo.com to their friends or
+        family.
+      </div>
+    </div>
+    <div class="footer-columns">
+      <div class="footer-col">
+        <h4>About Us</h4>
+        <a href="#">Imprint</a>
+        <a href="#">Feedback</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Accessibility Statement</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Popular choices</h4>
+        <a href="#">Kid-friendly accomodations</a>
+        <a href="#">Wellness</a>
+        <a href="#">Wellness deals</a>
+        <a href="#">Last minute offers</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>For Partners</h4>
+        <button class="list-property">List your property</button>
+        <a href="#">Log in as admin</a>
+        <a href="#">Admins – app for owners</a>
+        <a href="#">General Terms and Conditions</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact us</h4>
+        <div>Customer service:</div>
+        <div>Email: info@revngo.com</div>
+        <img src="jpg/2023_Facebook_icon.svg" class="contact-icon" />
+      </div>
+    </div>
+    <div class="footer-logos">
+      <img src="jpg/ssl-security.svg" class="logo-small" />
+      <img src="jpg/nevogate_black.svg" class="logo-main" />
+    </div>
+    <div class="footer-languages">
+      <a href="#"><img src="country/Flag_of_the_Czech_Republic.svg" /> Česky</a>
+      <a href="#"><img src="country/Flag_of_Hungary.svg" /> Magyar</a>
+      <a href="#"><img src="country/Flag_of_Romania.svg" /> Română</a>
+      <a href="#"><img src="country/Flag_of_Slovakia.svg" /> Slovenský</a>
+      <a href="#"><img src="country/Flag_of_Germany.svg" /> Deutsch</a>
+      <a href="#"><img src="country/Flag_of_Poland.svg" /> Polski</a>
+      <a href="#"><img src="country/Flag_of_Croatia.svg" /> Hrvatski</a>
+    </div>
+    <div class="footer-bottom">
+      Copyright 2008 - 2025.
+      <a href="#">Privacy Policy</a>
+      <a href="#">Report offensive content</a>
+    </div>
+
+    <!-- JS SCRIPTS (всегда перед </body>) -->
+    <script>
+      const text = document.getElementById("hotel-description");
+      const btn = document.getElementById("toggle-description");
+      btn.addEventListener("click", () => {
+        text.classList.toggle("expanded");
+        btn.textContent = text.classList.contains("expanded")
+          ? "Hide ▲"
+          : "See full description ▼";
+      });
+    </script>
+
+    <script>
+      const backTop = document.getElementById("backTopBtn");
+      window.addEventListener("scroll", () => {
+        backTop.classList.toggle("visible", window.scrollY > 400);
+      });
+      backTop.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+    </script>
+  </body>
+</html>

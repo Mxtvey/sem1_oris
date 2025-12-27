@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: minihttpserver_db
+    restart: always
+    environment:
+      POSTGRES_DB: exmpl
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: httpserver_app
+    depends_on:
+      - db
+    ports:
+      - "1235:1235"
+    environment:
+      Prefix: "http://+:1235/"
+      Domain: "+"
+      Port: "1235"
+      ConnectionStrings__Default: "Host=db;Port=5432;Database=exmpl;Username=postgres;Password=1234"
+
+volumes:
+  db_data:

@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Register</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <style>
+        /* чуть-чуть локальных стилей, чтобы форма выглядела нормально */
+        .auth-container {
+            max-width: 420px;
+            margin: 60px auto;
+            padding: 24px 28px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .auth-container h1 {
+            margin: 0 0 16px;
+            font-size: 22px;
+        }
+
+        .auth-subtitle {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 18px;
+        }
+
+        .form-row {
+            margin-bottom: 14px;
+        }
+
+        .form-row label {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .form-row input {
+            width: 100%;
+            padding: 8px 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .form-row input:focus {
+            outline: none;
+            border-color: #0071c2;
+            box-shadow: 0 0 0 1px rgba(0,113,194,0.2);
+        }
+
+        .error {
+            font-size: 11px;
+            color: #d93025;
+            margin-top: 3px;
+            min-height: 14px;
+        }
+
+        .form-global-error,
+        .form-success {
+            font-size: 13px;
+            margin-top: 8px;
+            min-height: 16px;
+        }
+
+        .form-global-error {
+            color: #d93025;
+        }
+
+        .form-success {
+            color: #1a7f37;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #0071c2;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 9px 16px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #005c9c;
+        }
+
+        .auth-footer {
+            margin-top: 16px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .auth-footer a {
+            color: #0071c2;
+            text-decoration: none;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="auth-container">
+    <h1>Create account</h1>
+    <div class="auth-subtitle">
+        Register to save your bookings and manage tours.
+    </div>
+
+    <form method="post" action="/tour/register">
+        <div class="form-row">
+            <label>Email</label>
+            <input type="email" name="email" />
+        </div>
+
+        <div class="form-row">
+            <label>User name</label>
+            <input type="text" name="userName" />
+        </div>
+
+        <div class="form-row">
+            <label>Phone</label>
+            <input type="text" name="phone" />
+        </div>
+
+        <div class="form-row">
+            <label>Password</label>
+            <input type="password" name="password" />
+        </div>
+
+        <div class="form-row">
+            <label>Repeat password</label>
+            <input type="password" name="password2" />
+        </div>
+
+        <button type="submit" class="btn">Register</button>
+    </form>
+
+
+    <div class="auth-footer">
+        Already have an account?
+        <!-- потом можно сделать /auth/login -->
+        <a href="/">Back to main page</a>
+    </div>
+</div>
+
+<script src="../js/register.js"></script>
+</body>
+</html>

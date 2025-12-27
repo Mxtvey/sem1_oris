@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Reset Password</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="/login_form/style.css"><!-- поправь путь при необходимости -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-6 col-md-6 d-none d-md-block image-container"></div>
+
+		<div class="col-lg-6 col-md-6 form-container">
+			<div class="col-lg-8 col-md-12 col-sm-9 col-xs-12 form-box">
+				<div class="text-center logo mb-3">
+					<img src="/login_form/image/logo.png" width="150px" alt="">
+				</div>
+
+				<div class="reset-form d-block">
+					<form class="reset-password-form" action="http://localhost:1235/auth" method="post">
+						<h4 class="mb-3">Reset your password</h4>
+						<p class="mb-3 text-white">Please enter your email address</p>
+						<div class="form-input">
+							<span><i class="fa fa-envelope"></i></span>
+							<input type="email" name="email" placeholder="Email Address" required>
+						</div>
+						
+						<input type="hidden" name="password" value="reset-request">
+						<div class="mb-3">
+							<button class="btn btn-primary" type="submit">Send Reset link</button>
+						</div>
+					</form>
+				</div>
+
+				<div class="reset-confirmation d-none text-center">
+					<h4 class="mb-3">Code sent!</h4>
+					<p class="text-white">Check your inbox for the reset code</p>
+				</div>
+
+				<!-- Блок показа ошибок -->
+				<pre id="resp" class="mt-3 text-white" style="white-space:pre-wrap"></pre>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	// Без перезагрузки отправляем POST и печатаем ответ/ошибку
+	document.querySelector('.reset-password-form').addEventListener('submit', async (e) => {
+		e.preventDefault();
+		const form = e.target;
+		const body = new URLSearchParams(new FormData(form)).toString();
+		const out = document.getElementById('resp');
+		try {
+			const r = await fetch(form.action, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8' },
+				body
+			});
+			const txt = await r.text();
+			out.textContent = `HTTP ${r.status}\n${txt}`;
+			if (r.ok) {
+				document.querySelector('.reset-form').classList.add('d-none');
+				document.querySelector('.reset-confirmation').classList.remove('d-none');
+			}
+		} catch (err) {
+			out.textContent = 'Network/JS error: ' + err;
+		}
+	});
+</script>
+</body>
+</html>

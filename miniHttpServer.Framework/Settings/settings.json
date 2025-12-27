@@ -1,0 +1,20 @@
+{
+    "StaticDirectoryPath": "static",
+    "Domain": "localhost",
+    "Port": 1235,
+    "Prefix": "http://localhost:1235/",
+    "MimeType": {
+        "html": "text/html",
+        "css": "text/css",
+        "js": "application/javascript",
+        "png": "image/png",
+        "jpg": "image/jpeg",
+        "jpeg": "image/jpeg",
+        "webp": "image/webp",
+        "ico": "image/x-icon",
+        "svg": "image/svg+xml",
+        "json": "application/json"
+    },
+
+    "ConnectionString": "Host=localhost;Port=5432;Database=exmpl;Username=postgres;Password=1234"
+}
